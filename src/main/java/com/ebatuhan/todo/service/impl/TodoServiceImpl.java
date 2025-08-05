@@ -9,6 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.ebatuhan.todo.dto.ToDoRequestDto;
 import com.ebatuhan.todo.dto.TodoResponseDto;

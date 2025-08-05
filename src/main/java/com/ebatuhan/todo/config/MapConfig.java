@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.ebatuhan.todo.dto.TodoResponseDto;
 import com.ebatuhan.todo.model.Todo;
+import com.ebatuhan.todo.model.TodoUser;
 
 @Configuration
 public class MapConfig {
@@ -20,15 +21,10 @@ public class MapConfig {
 				.setSkipNullEnabled(true);
 
 		modelMapper.typeMap(Todo.class, TodoResponseDto.class).addMappings(mapper -> {
-			mapper.using(ctx -> {
-				Object source = ctx.getSource();
-				if (source == null) {
-					return null;
-				}
-				Long userId = ((com.ebatuhan.todo.model.TodoUser) ((Todo) ctx.getParent().getSource()).getTodoUser())
-						.getId();
-				return userId;
-			}).map(Todo::getTodoUser, TodoResponseDto::setTodoUserId);
+			mapper.map(src -> {
+				TodoUser user = src.getTodoUser();
+				return user != null ? user.getId() : null;
+			}, TodoResponseDto::setTodoUserId);
 		});
 
 		return modelMapper;
