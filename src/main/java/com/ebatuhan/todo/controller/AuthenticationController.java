@@ -28,19 +28,4 @@ public class AuthenticationController {
 
     }
 
-    @GetMapping
-    public JwtResponseDto authenticates() {
-
-        String username = "batuhan";
-        String password = "123";
-
-        LoginRequestDto loginreq = new LoginRequestDto();
-
-        loginreq.setUsername(username);
-        loginreq.setPassword(password);
-
-        return authenticationService.authenticate(loginreq);
-
-    }
-
 }
