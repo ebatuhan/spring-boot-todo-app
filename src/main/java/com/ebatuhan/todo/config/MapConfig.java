@@ -23,12 +23,10 @@ public class MapConfig {
 			mapper.using(ctx -> {
 				Object source = ctx.getSource();
 				if (source == null) {
-					System.out.println("[ModelMapper] todoUser is null");
 					return null;
 				}
 				Long userId = ((com.ebatuhan.todo.model.TodoUser) ((Todo) ctx.getParent().getSource()).getTodoUser())
 						.getId();
-				System.out.println("[ModelMapper] Mapping userId: " + userId);
 				return userId;
 			}).map(Todo::getTodoUser, TodoResponseDto::setTodoUserId);
 		});
