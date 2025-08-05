@@ -5,17 +5,16 @@ import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PostFilter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpClientErrorException;
 
 import com.ebatuhan.todo.dto.ToDoRequestDto;
 import com.ebatuhan.todo.dto.TodoResponseDto;
 import com.ebatuhan.todo.exception.ResourceNotFoundException;
 import com.ebatuhan.todo.model.Todo;
-import com.ebatuhan.todo.model.TodoUser;
 import com.ebatuhan.todo.repository.TodoRepository;
 import com.ebatuhan.todo.repository.TodoUserRepository;
 import com.ebatuhan.todo.service.ITodoService;
@@ -44,16 +43,15 @@ public class TodoServiceImpl implements ITodoService {
 	}
 
 	@Override
+	@PostFilter("@authorizationService.isOwnerOfTodo(filterObject.getId())")
 	public List<TodoResponseDto> findAll() {
 
-		final TodoUser todoUser = todoUserRepository
-				.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-				.get();
 
-		return toDoRepository.findAllByTodoUser_Id(todoUser.getId())
+		return toDoRepository.findAll()
 				.stream()
 				.map(todo -> modelMapper.map(todo, TodoResponseDto.class))
 				.collect(Collectors.toList());
+
 	}
 
 	@Override

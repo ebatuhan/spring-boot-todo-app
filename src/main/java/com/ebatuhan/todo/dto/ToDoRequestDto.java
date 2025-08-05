@@ -23,6 +23,7 @@ public class ToDoRequestDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date deadline;
 
-	private boolean isDone = false;
+
+	private boolean done = false;
 
 }

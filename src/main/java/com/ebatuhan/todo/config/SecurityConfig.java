@@ -1,5 +1,8 @@
 package com.ebatuhan.todo.config;
 
+import java.util.List;
+
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,6 +20,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.web.BearerTokenAuthenticationEntryPoint;
 import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.JWKSet;
@@ -25,6 +30,7 @@ import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.ebatuhan.todo.record.RSAKeyProperties;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true, proxyTargetClass = true)
@@ -40,6 +46,7 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain secuirtyFilterChain(HttpSecurity http) throws Exception {
 		return http
+				.cors(withDefaults())
 				.authorizeHttpRequests(auth -> auth
 						.requestMatchers("/auth/**", "/register/**").permitAll()
 						.anyRequest().authenticated())
@@ -77,6 +84,20 @@ public class SecurityConfig {
 	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
 			throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
+	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.setAllowedOriginPatterns(List.of("*"));
+		config.setAllowedHeaders(List.of("*"));
+		config.setAllowedMethods(List.of("*")); 
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+
+		return new CorsFilter(source);
 	}
 
 }

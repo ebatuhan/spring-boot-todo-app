@@ -2,6 +2,8 @@ package com.ebatuhan.todo.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,7 +42,8 @@ public class Todo {
 	@Column(nullable = false)
 	private Date expireDate;
 
-	private boolean isDone = false;
+
+	private boolean done = false;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")

@@ -2,6 +2,7 @@ package com.ebatuhan.todo.dto;
 
 import java.sql.Date;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class TodoResponseDto {
 
 	private Date deadline;
 
-	private boolean isDone;
+	private boolean done;
 
 	private Long todoUserId;
 }
