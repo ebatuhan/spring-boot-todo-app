@@ -14,8 +14,8 @@ public interface TodoRepository extends JpaRepository<Todo, Long> {
 	List<Todo> findAllByTodoUser_Id(Long userId);
 
 	@Modifying
-    @Transactional
+	@Transactional
 	@Query(nativeQuery = true, value = "delete from todo where expire_date <= NOW()")
-    void deleteExpiredTodos();
+	void deleteExpiredTodos();
 
 }
