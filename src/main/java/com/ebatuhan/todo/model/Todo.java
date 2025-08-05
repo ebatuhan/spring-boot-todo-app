@@ -28,16 +28,16 @@ public class Todo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String todoName;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String todoContent;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Date deadline;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Date expireDate;
 
 	private boolean isDone = false;

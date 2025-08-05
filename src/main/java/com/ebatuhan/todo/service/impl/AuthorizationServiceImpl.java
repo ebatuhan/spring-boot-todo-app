@@ -7,7 +7,6 @@ import com.ebatuhan.todo.exception.ResourceNotFoundException;
 import com.ebatuhan.todo.repository.TodoRepository;
 import com.ebatuhan.todo.service.IAuthorizationService;
 
-
 @Service("authorizationService")
 public class AuthorizationServiceImpl implements IAuthorizationService {
 

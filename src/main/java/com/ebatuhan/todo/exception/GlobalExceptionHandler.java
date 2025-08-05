@@ -58,7 +58,8 @@ public class GlobalExceptionHandler {
 	}
 
 	@ExceptionHandler
-	public ResponseEntity<ErrorResponse> handleBadPasswordPatternExcpetion(BadPasswordPatternException ex, WebRequest request) {
+	public ResponseEntity<ErrorResponse> handleBadPasswordPatternExcpetion(BadPasswordPatternException ex,
+			WebRequest request) {
 		ErrorResponse errorResponse = new ErrorResponse(ex.getMessage(), request);
 
 		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);

@@ -32,18 +32,18 @@ public class TodoUser implements UserDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String username;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String password;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private String firstName;
 
 	private String lastName;
 
-	@Column(nullable=false)
+	@Column(nullable = false)
 	private Date birthDate;
 
 	@OneToMany(mappedBy = "todoUser", orphanRemoval = true, fetch = FetchType.LAZY)

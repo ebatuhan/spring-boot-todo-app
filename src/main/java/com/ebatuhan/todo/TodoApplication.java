@@ -7,7 +7,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.ebatuhan.todo.record.RSAKeyProperties;
 
-
 @SpringBootApplication
 @EnableScheduling
 @EnableConfigurationProperties(RSAKeyProperties.class)

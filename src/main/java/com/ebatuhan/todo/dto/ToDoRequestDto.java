@@ -17,9 +17,8 @@ import lombok.Setter;
 public class ToDoRequestDto {
 
 	private String todoName;
-	
+
 	private String todoContent;
-	
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date deadline;

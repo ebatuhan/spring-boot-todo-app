@@ -14,7 +14,7 @@ import lombok.Setter;
 public class RegisterResponseDto {
 
     private Long id;
-    
+
     private String username;
 
     private String firstName;
@@ -23,5 +23,4 @@ public class RegisterResponseDto {
 
     private Date birthDate;
 
-    
 }
